@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-export default class Login extends Component {
+export default class Signup extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       email: "",
       password: "",
-      loginErrors: ""
+      password_confirmation: "",
+      registrationErrors: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,26 +23,27 @@ export default class Login extends Component {
   }
 
   handleSubmit(event) {
-    const { email, password } = this.state;
+    const { email, password, password_confirmation } = this.state;
 
     axios
       .post(
-        "http://localhost:3001/sessions",
+        "http://localhost:3000/signup",
         {
           user: {
             email: email,
-            password: password
+            password: password,
+            password_confirmation: password_confirmation
           }
         },
         { withCredentials: true }
       )
       .then(response => {
-        if (response.data.logged_in) {
+        if (response.data.status === "created") {
           this.props.handleSuccessfulAuth(response.data);
         }
       })
       .catch(error => {
-        console.log("login error", error);
+        console.log("registration error", error);
       });
     event.preventDefault();
   }
@@ -68,7 +70,16 @@ export default class Login extends Component {
             required
           />
 
-          <button type="submit">Login</button>
+          <input
+            type="password"
+            name="password_confirmation"
+            placeholder="Password confirmation"
+            value={this.state.password_confirmation}
+            onChange={this.handleChange}
+            required
+          />
+
+          <button type="submit">Signup</button>
         </form>
       </div>
     );
