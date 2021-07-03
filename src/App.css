@@ -8,13 +8,16 @@
 .home,
 .services,
 .products,
-.sign-up {
+.sign-up,
+.Login {
   display: flex;
   height: 90vh;
   align-items: center;
   justify-content: center;
   font-size: 3rem;
 }
+
+
 
 /* .services {
   background-image: url('/src/images/img-2.jpg');

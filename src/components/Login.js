@@ -1,76 +1,67 @@
-import React, { Component } from "react";
-import axios from "axios";
+// Imports
+import React, { useState } from 'react';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from '../utils/setAuthToken';
+import { Redirect } from 'react-router-dom';
+const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:8000';
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
+const Login = (props) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    this.state = {
-      email: "",
-      password: "",
-      loginErrors: ""
-    };
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
+    }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
+    const handlePassword = (e) => {
+        setPassword(e.target.value);
+    }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const userData = { email, password };
 
-  handleSubmit(event) {
-    const { email, password } = this.state;
+        axios.post(`${REACT_APP_SERVER_URL}/api/users/login`, userData)
+        .then(response => {
+            const { token } = response.data;
+            // Save token to localStorage
+            localStorage.setItem('jwtToken', token);
+            // Set token to auth header
+            setAuthToken(token);
+            // Decode token to get the user data
+            const decoded = jwt_decode(token);
+            // Set current user
+            props.nowCurrentUser(decoded);
+        })
+        .catch(error =>{
+            console.log(error);
+            alert('Either email or password is incorrect. Please try again.');
+        });
+    }
 
-    axios
-      .post(
-        "http://localhost:3001/sessions",
-        {
-          user: {
-            email: email,
-            password: password
-          }
-        },
-        { withCredentials: true }
-      )
-      .then(response => {
-        if (response.data.logged_in) {
-          this.props.handleSuccessfulAuth(response.data);
-        }
-      })
-      .catch(error => {
-        console.log("login error", error);
-      });
-    event.preventDefault();
-  }
+    // if (props.user) return <Redirect to='/profile' />
 
-  render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleChange}
-            required
-          />
-
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleChange}
-            required
-          />
-
-          <button type="submit">Login</button>
-        </form>
-      </div>
-    );
-  }
+        <div className="row mt-4">
+            <div className="col-md-7 offset-md-3">
+                <div className="card card-body">
+                    <h2 className="py-2">Login</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="email">Email</label>
+                            <input type="email" name="email" value={email} onChange={handleEmail} className="form-control" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input type="password" name="password" value={password} onChange={handlePassword} className="form-control" />
+                        </div>
+                        <button type="submit" className="btn btn-primary float-right">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    )
 }
+
+export default Login; 
