@@ -3,7 +3,7 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-function Navbar() {
+function Navbar({ user }) {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -30,7 +30,7 @@ function Navbar() {
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
             Unplanned Place
-            <i class='fab fa-typo3' />
+            <i className='fab fa-typo3' />
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -60,27 +60,39 @@ function Navbar() {
               </Link>
             </li>
 
+            {!user ? (
+              <li>
+                <Link
+                  to='/sign-up'
+                  className='nav-links-mobile'
+                  onClick={closeMobileMenu}>
+                  Sign Up
+                </Link>
+              </li>
+            ) : null}
+          </ul>
+          {button && !user && <Button to='/sign-up' buttonStyle='btn--outline'>SIGN UP</Button>}
+          {!user ? (
             <li>
               <Link
-                to='/sign-up'
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
-                Sign Up
-              </Link>
-            </li>
-          </ul>
-          {button && <Button to='/sign-up' buttonStyle='btn--outline'>SIGN UP</Button>}
-          <li>
-          <Link
                 to='/login'
                 className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
-              Login
+                onClick={closeMobileMenu}>
+                Login
               </Link>
-          </li>
-          {button && <Button to="/login" buttonStyle='btn--outline'>Login</Button>}
+            </li>
+          ) : (
+            <li>
+              <Link
+                to='/logout'
+                className='nav-links-mobile'
+                onClick={closeMobileMenu}>
+                Logout
+              </Link>
+            </li>
+          )}
+          {button && !user && <Button to="/login" buttonStyle='btn--outline'>Login</Button>}
+          {button && !!user && <Button to="/logout" buttonStyle='btn--outline'>Logout</Button>}
         </div>
       </nav>
     </>

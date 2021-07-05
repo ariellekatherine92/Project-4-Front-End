@@ -40,10 +40,10 @@ const Login = (props) => {
         });
     }
 
-    // if (props.user) return <Redirect to='/profile' />
+    if (props.user) return <Redirect to='/profile' />
 
     return (
-        <div className="row mt-4">
+        <div className="row mt-4 login-container">
             <div className="col-md-7 offset-md-3">
                 <div className="card card-body">
                     <h2 className="py-2">Login</h2>

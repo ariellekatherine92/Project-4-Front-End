@@ -17,6 +17,57 @@
   font-size: 3rem;
 }
 
+.signup-page,
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-container,
+.login-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  display: inline-block;
+  width: auto;
+  margin: 100px auto;
+  padding: 62px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+}
+
+.signup-container h2,
+.login-container h2 {
+  margin-bottom: 50px;
+}
+
+.signup-container input,
+.login-container input {
+  border-radius: 3px;
+  margin-left: 8px;
+  border: 1px solid #fff;
+}
+
+.signup-container label,
+.login-container label {
+  width: 100%;
+  display: block;
+  color: #666;
+}
+
+.signup-container .btn,
+.login-container .btn {
+  margin-top: 25px;
+}
+
+.signup-container .form-group,
+.login-container .form-group {
+  margin-bottom: 8px;
+}
+
+.profile-page h3 {
+  color: #fff;
+}
 
 
 /* .services {

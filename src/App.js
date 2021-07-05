@@ -8,10 +8,12 @@ import './App.css';
 // Components
 import Navbar from './components/Navbar';
 import SignUp from './components/pages/SignUp';
-import Login from './components/Login';
+import Login from './components/pages/Login';
+import Logout from './components/pages/Logout';
 import Home from './components/pages/Home';
 import Services from './components/pages/Services';
 import Products from './components/pages/Products';
+import Profile from './components/pages/Profile';
 
 // Private route component
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -59,14 +61,25 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar />
+        <Navbar user={currentUser} />
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/services' component={Services} />
           <Route path='/products' component={Products} />
           <Route path='/sign-up' component={SignUp} />
-          <Route path='/login' 
-                render={ (props) => <Login {...props} user={currentUser} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} /> } />
+          <Route 
+            path='/login' 
+            render={(props) => (
+              <Login {...props} user={currentUser} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} />
+            )}
+          />
+          <Route 
+            path='/logout' 
+            render={(props) => (
+              <Logout {...props} user={currentUser} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} />
+            )}
+          />
+          <Route path="/profile" render={props => (<Profile {...props} user={currentUser} />)} />
         </Switch>
       </Router>
     </>
