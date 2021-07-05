@@ -14,6 +14,7 @@ import Home from './components/pages/Home';
 import Services from './components/pages/Services';
 import Products from './components/pages/Products';
 import Profile from './components/pages/Profile';
+import Blog from './components/pages/Blog';
 
 // Private route component
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -80,6 +81,7 @@ function App() {
             )}
           />
           <Route path="/profile" render={props => (<Profile {...props} user={currentUser} />)} />
+          <Route path="/blog" render={props => (<Blog {...props} user={currentUser} />)} />
         </Switch>
       </Router>
     </>
