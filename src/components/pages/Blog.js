@@ -8,6 +8,7 @@ const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localho
 
 const Blog = props => {
     const [posts, setPosts] = useState([]);
+    const [comments, setComments] = useState([]);
 
     const updatePosts = () => {
         axios.get(`${REACT_APP_SERVER_URL}/api/posts`).then(({ data }) => {
@@ -17,8 +18,17 @@ const Blog = props => {
         });
     };
 
+    const updateComments = () => {
+        axios.get(`${REACT_APP_SERVER_URL}/api/comments`).then(({ data }) => {
+            setComments(data?.comments || []);
+        }, error => {
+            console.error(error);
+        });
+    };
+
     useEffect(() => {
         updatePosts();
+        updateComments();
     }, []);
 
     const renderPosts = () => {
@@ -26,6 +36,9 @@ const Blog = props => {
             <BlogPost 
                 key={`post-${post._id}`}
                 updatePosts={updatePosts}
+                allComments={comments}
+                updateComments={updateComments}
+                user={props.user}
                 {...post}
             />
         ));

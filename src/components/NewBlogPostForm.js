@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { isAdmin } from '../utils/admins';
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:8000';
-
-const ADMINS = [
-    'ariellekatherine92@gmail.com',
-    'ledezmajane@gmail.com',
-];
 
 const NewBlogPostForm = props => {
     const [title, setTitle] = useState('');
@@ -28,19 +24,29 @@ const NewBlogPostForm = props => {
             body,
         }).then(resp => {
             props.updatePosts();
+            setTitle('');
+            setBody('');
         }, error => {
             console.error(error);
         });
     };
 
-    if (!ADMINS.includes(props.user?.email)) {
+    if (!isAdmin(props.user)) {
         return null;
     }
 
     return (
         <form className="blog-post-form" onSubmit={handleSubmit}>
-            <input type="text" placeholder="title" onChange={handleTitleChange} />
-            <textarea onChange={handleBodyChange} />
+            <input 
+                type="text" 
+                placeholder="title" 
+                onChange={handleTitleChange}
+                value={title}
+            />
+            <textarea 
+                onChange={handleBodyChange}
+                value={body}
+            />
             <button type="submit">Submit</button>
         </form>
     );
