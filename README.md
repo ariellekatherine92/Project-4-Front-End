@@ -13,3 +13,5 @@ In this project we plan to include a login for users so they can have access to 
 comment section for people to be able to engage in discussion about posts and articles they find interesting. 
 
 We would also like to include a local business aspect of local businesses we frequent and use. As one of us lives near NYC, and the other lives in Seattle we both had plenty of experiences to collaborate on to make this project happen. 
+
+hello
