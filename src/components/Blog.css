@@ -18,10 +18,14 @@
 .blog-container .blog-post-form input {
     width: 500px;
     margin-bottom: 22px;
+    font-size: 18px;
+    padding: 4px;
 }
 
 .blog-container .blog-post-form textarea {
     height: 100px;
+    padding: 4px;
+    font-size: 16px;
 }
 
 .blog-container .blog-post-form button {
@@ -43,9 +47,44 @@
     border-radius: 12px;
 }
 
+.blog-container li.blog-post-item > h3 {
+    margin-bottom: 8px;
+}
+
+.blog-container li.blog-post-item > p {
+    margin-bottom: 8px;
+}
+
 .blog-container li.blog-post-item .btn-delete,
 .blog-container li.blog-post-item .btn-comment {
     cursor: pointer;
     float: right;
     margin-left: 12px;
+    opacity: 0.4;
+    transition: opacity 300ms;
+}
+
+.blog-container li.blog-post-item .btn-delete:hover,
+.blog-container li.blog-post-item .btn-comment:hover {
+    opacity: 0.8;
+}
+
+.blog-container li.blog-post-item .blog-post-comments-container {
+    width: 100%;
+    padding: 12px;
+    margin-top: 32px;
+}
+
+.blog-container li.blog-post-item .blog-post-comments-container li {
+    list-style-type: none;
+    background: #e8f4f8;
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 12px;
+}
+
+.blog-container li.blog-post-item .blog-post-comments-container li span {
+    font-size: 80%;
+    font-style: italic;
+    opacity: 0.8;
 }

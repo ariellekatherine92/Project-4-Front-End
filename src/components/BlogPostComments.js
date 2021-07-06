@@ -10,12 +10,15 @@ const BlogPostComments = ({ postId, allComments }) => {
 
     return (
         <ul className="blog-post-comments-container">
-            {comments.map(({ name, date, body }) => (
-                <li>
-                    <p>{body}</p>
-                    <span>{name} - {date}</span>
-                </li>
-            ))}
+            {comments.map(({ name, date, body }) => {
+                const dtDate = new Date(date);
+                return (
+                    <li key={`comment-${date}`}>
+                        <p>{body}</p>
+                        <span>{name} - {dtDate.toLocaleDateString()}</span>
+                    </li>
+                );
+            })}
         </ul>
     );
 };
