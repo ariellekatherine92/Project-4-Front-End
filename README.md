@@ -25,6 +25,10 @@ By opening an admins.js file under utils we were able to add each admins email a
 
 ![alt text](https://github.com/ariellekatherine92/Project-4-Front-End/blob/master/public/images/admins.png?raw=true)
 
+Another cool feature we implimented was the use of a video for our background in our Blog.js file. In our code snippet it shows how we made use of a div and implimented our video into our blog container. The video was saved into our images folder.
+
+![alt text]()
+
 
 # BackEnd with Express
 
