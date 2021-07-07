@@ -14,6 +14,18 @@ comment section for people to be able to engage in discussion about posts and ar
 
 We would also like to include a local business aspect of local businesses we frequent and use. As one of us lives near NYC, and the other lives in Seattle we both had plenty of experiences to collaborate on to make this project happen.
 
+![alt text](https://github.com/ariellekatherine92/Project-4-Front-End/blob/master/public/images/userstories.png?raw=true)
+
+# Frontend with React
+
+One of the features our group wanted to impliment for this project was admin access only for blog and posting content. Although we originally believed
+we could do this on the backend it was actually the frontend that made it happen.
+
+By opening an admins.js file under utils we were able to add each admins email and export them as the only users allowed to post content.
+
+![alt text](https://github.com/ariellekatherine92/Project-4-Front-End/blob/master/public/images/admins.png?raw=true)
+
+
 # BackEnd with Express
 
 We sarted off by building our model for our blog posts. We gave our `Post` entity attributes of `title`, `body` and an `author`. Only Ariel, Cody or Janeth can create a post. Posts are associated with the User.
@@ -188,3 +200,8 @@ const deletePost = async (req, res) => {
 }
 
 ```
+
+# Future Considerations
+
+For this project post grad we plan on building it to a completely functional blog site complete with content and social media. We would also like to add
+an ecommerce store for reccommendations that we make during our travels or things we use during our content posts. We also plan on continuing with the style aspect of the project and make the logos/content cleaner.
